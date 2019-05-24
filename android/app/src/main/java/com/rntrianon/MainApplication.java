@@ -1,4 +1,4 @@
-package com.trianongarcom;
+package com.rntrianon;
 
 import android.app.Application;
 

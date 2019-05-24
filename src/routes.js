@@ -1,17 +1,15 @@
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 // createSwitchNavigator
-import Main from '~/pages/Main';
-import Mesa from '~/pages/Mesa';
-import Produto from '~/pages/Produto';
+import Home from '~/pages/home';
+import Produto from '~/pages/produtos';
 
 const Routes = createStackNavigator(
   {
-    MainPage: Main,
-    MesaPage: Mesa,
+    HomePage: Home,
     ProdutoPage: Produto,
   },
   {
-    initialRouteName: 'MesaPage',
+    initialRouteName: 'ProdutoPage',
   },
 );
 

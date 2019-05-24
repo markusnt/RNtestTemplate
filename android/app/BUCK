@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.trianongarcom",
+    package = "com.rntrianon",
 )
 
 android_resource(
     name = "res",
-    package = "com.trianongarcom",
+    package = "com.rntrianon",
     res = "src/main/res",
 )
 
