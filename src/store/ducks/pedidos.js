@@ -14,8 +14,26 @@ export default function pedidos(state = INITAL_STATE, action) {
         action.payload,
       ];
     case Types.REMOVE:
-      return state.filter(pedido => pedido.cd_produto === action.payload.cd_produto);
+      return state.filter(pedido => pedido.cd_produto !== action.payload.cd_produto);
     default:
       return state;
   }
 }
+
+export const Creators = {
+  // eslint-disable-next-line camelcase
+  addPedido: cd_produto => ({
+    type: Types.ADD,
+    payload: {
+      cd_produto,
+    },
+  }),
+
+  // eslint-disable-next-line camelcase
+  removePedido: cd_produto => ({
+    type: Types.REMOVE,
+    payload: {
+      cd_produto,
+    },
+  }),
+};

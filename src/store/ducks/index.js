@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
 
+import pedidos from './pedidos';
+
 const reducers = combineReducers({
-  // Remova essa linha depois de adicionar seus ducks
-  example: () => [],
+  pedidos,
 });
 
 export default reducers;

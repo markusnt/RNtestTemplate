@@ -5,11 +5,13 @@
 import React, { Component } from 'react';
 import { Icon } from 'react-native-elements';
 
-import {
-  View, Text, StatusBar, TouchableOpacity, FlatList, ProgressBarAndroid, StyleSheet,
-} from 'react-native';
-
 import { connect } from 'react-redux';
+// import { bindActionCreators } from 'redux';
+import { Creators as PedidoActions } from '~/store/ducks/pedidos';
+
+import {
+  View, Text, StatusBar, TouchableOpacity, FlatList, ProgressBarAndroid, StyleSheet, ToastAndroid,
+} from 'react-native';
 
 const styles = StyleSheet.create({
   containerProduto: {
@@ -37,7 +39,6 @@ const styles = StyleSheet.create({
     color: 'white',
     backgroundColor: '#DB4437',
     borderRadius: 5,
-    height: 2,
   },
 });
 // static propTypes = {
@@ -78,7 +79,12 @@ export class produtos extends Component {
       this.getProdutosApi();
       this.props.navigation.setParams({ increaseCount: this._increaseCount });
     }
-   
+
+    handleAddCart = () => {
+      ToastAndroid.show('Produto adicionado ao pedido', ToastAndroid.SHORT);
+      this.setState({ count: this.state.count + 1 });
+    }
+
     _increaseCount = () => {
       this.setState({ count: this.state.count + 0.01 });
     };
@@ -97,7 +103,7 @@ export class produtos extends Component {
           <Text style={styles.textProduto}>{item.ds_produto} </Text>
           <Text style={styles.textPreco}>R${item.pr_produto.toFixed(2)}</Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={this.handleAddCart}>
           <Text style={styles.test}> Adicionar </Text>
         </TouchableOpacity>
       </View>
@@ -107,12 +113,13 @@ export class produtos extends Component {
       return (
         <View>
           <StatusBar barStyle="light-content" backgroundColor="#25CBCB" />
-          {/* <ProgressBarAndroid
+          <ProgressBarAndroid
             styleAttr="Horizontal"
             indeterminate={false}
             progress={this.state.count}
           />
-          <Text> Count: {this.state.count}</Text> */}
+          <Text> Items no Carrinho: {this.state.count}</Text>
+          
           <FlatList
             style={styles.flat}
             data={this.state.produtos}
