@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     color: 'white',
     backgroundColor: '#DB4437',
     borderRadius: 5,
+    height: 25,
   },
 });
 // static propTypes = {
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
 // }
 
 export class produtos extends Component {
-    static navigationOptions = ({ navigation }) => ({
+    static navigationOptions = ({ navigation, navigate }) => ({
       headerTransparent: false,
       title: 'Produtos',
       headerStyle: {
@@ -58,6 +59,14 @@ export class produtos extends Component {
         flexGrow: 1,
         alignSelf: 'center',
       },
+      headerLeft: (
+        <Icon
+          name="md-basket"
+          type="ionicon"
+          color="#25CBCB"
+          size={25}
+        />
+      ),
       headerRight: (
         <Icon
           name="md-basket"
@@ -65,7 +74,8 @@ export class produtos extends Component {
           color="#25CBCB"
           size={25}
           reverse
-          onPress={navigation.getParam('increaseCount')}
+          onPress={() => { navigation.navigate('PedidoPage'); }}
+          // onPress={navigation.navigate('PedidoPage')}
         />
       ),
     })
@@ -113,12 +123,12 @@ export class produtos extends Component {
       return (
         <View>
           <StatusBar barStyle="light-content" backgroundColor="#25CBCB" />
-          <ProgressBarAndroid
+          {/* <ProgressBarAndroid
             styleAttr="Horizontal"
             indeterminate={false}
             progress={this.state.count}
           />
-          <Text> Items no Carrinho: {this.state.count}</Text>
+          <Text> Items no Carrinho: {this.state.count}</Text> */}
           
           <FlatList
             style={styles.flat}
