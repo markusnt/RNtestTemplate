@@ -10,7 +10,8 @@ import {
 } from 'react-native';
 
 import { connect } from 'react-redux';
-
+import { bindActionCreators } from 'redux';
+import { Creators as ProdutoActions } from '~/store/ducks/produtos';
 
 width = Dimensions.get('window').width;
 
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Pedido extends Component {
+export class pedido extends Component {
     static navigationOptions = ({ navigation }) => ({
       headerTransparent: false,
       title: 'Pedido',
@@ -76,12 +77,12 @@ export default class Pedido extends Component {
     })
 
     constructor(props) {
-      super(props);
-      this.state = {
-        pedidos: this.props.pedidos,
-        porra: 0,
-      };
+        super(props);
+        this.state = {
+            pedido: this.props.pedidoItems,
+        }
     }
+
 
     componentDidMount() {
 
@@ -96,33 +97,35 @@ export default class Pedido extends Component {
       });
     }
 
-    renderProduto = ({ item, index }) => {
-
-      return (
-        <View style={styles.lista_pedido}>
-          <Text> R$ 10.00 </Text>
-        </View>
-      );
-    }
+    renderProduto = (item) => (
+      <View style={styles.containerProduto}>
+        
+      </View>
+    );
 
     render() {
       const { navigation } = this.props;
       const nr_mesa = navigation.getParam('nr_mesa', 'NO-ID');
-      const { pedidos } = this.props;
-      const test = 1;
       return (
         <View style={styles.container}>
-          {test > 0 ? (
+          {this.props.pedidoItems.length > 0 ? (
             <View>
               <View style={styles.titulo_mesa}>
                 <Text> Mesa {nr_mesa} </Text>
               </View>
-              <FlatList
+
+              {/* <FlatList
                 style={styles.itemList}
-                            // data={this.props.cartItems}
-                // eslint-disable-next-line prefer-template
+                data={this.props.pedidoItems}
+                keyExtractor={({ cd_produto }, index) => `cd_produto${index}`}
+                renderItem={this.renderProduto}
+              /> */}
+
+              <FlatList
+                style={styles.flat}
+                data={this.props.pedidoItems}
                 // eslint-disable-next-line no-unused-vars
-                keyExtractor={({ id }, index) => 'id' + index}
+                keyExtractor={item => String(item.cd_produto)}
                 renderItem={this.renderProduto}
               />
 
@@ -141,3 +144,11 @@ export default class Pedido extends Component {
       );
     }
 }
+
+const mapStateToProps = state => ({
+  pedidoItems: state.produtos,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(ProdutoActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(pedido);

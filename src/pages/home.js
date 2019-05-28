@@ -4,6 +4,8 @@ import {
   Text, Image, StyleSheet, Dimensions, ImageBackground, StatusBar,
 } from 'react-native';
 
+import bgImage from './../resource/img/backk.jpeg';
+
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
@@ -35,31 +37,19 @@ const styles = StyleSheet.create({
 
 export default class Home extends Component {
   static navigationOptions = {
-    title: 'puts',
+    headerTransparent: true,
   }
 
   render() {
     return (
+      // <ImageBackground source={bgImage} style={styles.container}></ImageBackground>
       <ImageBackground
-        source={{
-          uri: 'https://s3-sa-east-1.amazonaws.com/rocketseat-cdn/background.png',
-        }}
+        source={bgImage}
         style={styles.container}
         resizeMode="cover"
       >
-        <StatusBar barStyle="light-content" backgroundColor="#7159c1" />
-        <Image
-          source={{
-            uri: 'https://s3-sa-east-1.amazonaws.com/rocketseat-cdn/rocketseat_logo.png',
-          }}
-          style={styles.logo}
-          resizeMode="contain"
-        />
-        <Text style={styles.welcome}>Bem-vindo ao Template Avançado!</Text>
-        <Text style={styles.instructions}>Essa é a tela principal da sua aplicação =)</Text>
-        <Text style={styles.instructions}>Você pode editar a tela no arquivo:</Text>
-        <Text style={[styles.instructions, styles.fileName]}>src/pages/Main/index.js</Text>
-      </ImageBackground>
+        <StatusBar hidden={true} />
+        </ImageBackground>
     );
   }
 }

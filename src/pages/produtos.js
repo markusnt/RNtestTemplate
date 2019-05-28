@@ -126,8 +126,7 @@ export class produtos extends Component {
           <FlatList
             style={styles.flat}
             data={this.state.produtos}
-            // eslint-disable-next-line no-unused-vars
-            keyExtractor={({ id }, index) => `id${index}`}
+            keyExtractor={item => String(item.cd_produto)}
             renderItem={this.renderProduto}
           />
         </View>
