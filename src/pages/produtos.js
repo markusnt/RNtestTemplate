@@ -59,14 +59,6 @@ export class produtos extends Component {
         flexGrow: 1,
         alignSelf: 'center',
       },
-      headerLeft: (
-        <Icon
-          name="md-basket"
-          type="ionicon"
-          color="#25CBCB"
-          size={25}
-        />
-      ),
       headerRight: (
         <Icon
           name="md-basket"

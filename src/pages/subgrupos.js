@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent'
     },
     text: {
-        fontSize: 25,
+        fontSize: 20,
         color: '#FFF',
     },
     actionButtonIcon: {
