@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import pedidos from './pedidos';
+import produtos from './produtos';
 
 const reducers = combineReducers({
-  pedidos,
+  produtos,
 });
 
 export default reducers;

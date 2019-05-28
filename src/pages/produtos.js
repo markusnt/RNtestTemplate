@@ -1,13 +1,13 @@
-/* eslint-disable react-native/split-platform-components */
 /* eslint-disable linebreak-style */
 /* eslint-disable no-undef */
 /* eslint-disable react/destructuring-assignment */
+/* eslint-disable react-native/split-platform-components */
 import React, { Component } from 'react';
 import { Icon } from 'react-native-elements';
 
 import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
-import { Creators as PedidoActions } from '~/store/ducks/pedidos';
+import { bindActionCreators } from 'redux';
+import { Creators as ProdutoActions } from '~/store/ducks/produtos';
 
 import {
   View, Text, StatusBar, TouchableOpacity, FlatList, ProgressBarAndroid, StyleSheet, ToastAndroid,
@@ -19,11 +19,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderBottomWidth: 2,
     borderBottomColor: '#ddd',
-    marginBottom: 10,
-    marginTop: 5,
+    marginBottom: 15,
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+
   boxProduto: {
 
   },
@@ -113,7 +113,7 @@ export class produtos extends Component {
           <Text style={styles.textProduto}>{item.ds_produto} </Text>
           <Text style={styles.textPreco}>R${item.pr_produto.toFixed(2)}</Text>
         </View>
-        <TouchableOpacity onPress={this.handleAddCart}>
+        <TouchableOpacity onPress={this.props.addProduto}>
           <Text style={styles.test}> Adicionar </Text>
         </TouchableOpacity>
       </View>
@@ -123,6 +123,7 @@ export class produtos extends Component {
       return (
         <View>
           <StatusBar barStyle="light-content" backgroundColor="#25CBCB" />
+          <Text> Pedido tem {this.props.produtos.length} itens a serem enviados</Text>
           {/* <ProgressBarAndroid
             styleAttr="Horizontal"
             indeterminate={false}
@@ -142,12 +143,10 @@ export class produtos extends Component {
     }
 }
 
-const mapStateToProps = () => ({
-
+const mapStateToProps = state => ({
+  produtos: state.produtos,
 });
 
-const mapDispatchToProps = {
-
-};
+const mapDispatchToProps = dispatch => bindActionCreators(ProdutoActions, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(produtos);
