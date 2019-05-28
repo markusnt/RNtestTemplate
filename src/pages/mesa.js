@@ -11,6 +11,7 @@ import {
   View,
   FlatList,
   TouchableOpacity,
+  StatusBar,
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -160,7 +161,8 @@ export default class Mesa extends Component {
     };
 
     return (
-
+        <View>
+          <StatusBar barStyle="light-content" backgroundColor="#25CBCB" />
       <FlatList
         data={formatData(this.state.mesas, numColumns)}
         style={styles.container}
@@ -170,7 +172,7 @@ export default class Mesa extends Component {
         refreshing={this.state.refreshing}
         onRefresh={this.handleRefresh}
       />
-
+        </View>
 
     );
   }

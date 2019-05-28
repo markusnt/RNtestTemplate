@@ -8,6 +8,7 @@ import {
   View,
   FlatList,
   TouchableOpacity,
+  StatusBar,
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -116,6 +117,7 @@ export default class Grupo extends Component {
 
       return (
         <View style={styles.container}>
+          <StatusBar barStyle="light-content" backgroundColor="#25CBCB" />
           <FlatList
             data={formatData(this.state.grupos, numColumns)}
             style={styles.container}
