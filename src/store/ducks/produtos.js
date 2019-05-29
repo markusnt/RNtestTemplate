@@ -15,7 +15,7 @@ export const { Types, Creators } = createActions({
  */
 
 const INITAL_STATE = [];
-
+// https://www.youtube.com/watch?v=rPik5Z2SvHs assistir esse video
 const add = (state = INITAL_STATE, action) => [
   ...state,
   action.payload,

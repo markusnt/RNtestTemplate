@@ -97,15 +97,17 @@ export class pedido extends Component {
       });
     }
 
-    renderProduto = (item) => (
+    renderProduto = item => (
       <View style={styles.containerProduto}>
-        
+        <Text> opa </Text>
       </View>
     );
 
     render() {
       const { navigation } = this.props;
       const nr_mesa = navigation.getParam('nr_mesa', 'NO-ID');
+      console.log(this.props.pedidoItems)
+      console.log('teste de pedido ====')
       return (
         <View style={styles.container}>
           {this.props.pedidoItems.length > 0 ? (
@@ -121,19 +123,18 @@ export class pedido extends Component {
                 renderItem={this.renderProduto}
               /> */}
 
-              <FlatList
+              {/* <FlatList
                 style={styles.flat}
                 data={this.props.pedidoItems}
                 // eslint-disable-next-line no-unused-vars
-                keyExtractor={item => String(item.cd_produto)}
+                keyExtractor={({ id }, index) => `id${index}`}
                 renderItem={this.renderProduto}
-              />
-
+              /> */}
               <View style={styles.total_pedido}>
                 <Text> Total: R$ </Text>
               </View>
 
-              {/* <Text> Itens a serem pedidos: {this.props.cartItems.length} </Text> */}
+              <Text> Itens a serem pedidos: {this.props.pedidoItems.length} </Text>
               <TouchableOpacity style={styles.btnLogin} onPress={() => this.alteracaoEstadoMesa()}>
                 <Text style={styles.Text}>Enviar Pedido </Text>
               </TouchableOpacity>

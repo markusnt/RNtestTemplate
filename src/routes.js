@@ -17,7 +17,7 @@ const Routes = createStackNavigator(
     PedidoPage: Pedido,
   },
   {
-    initialRouteName: 'HomePage',
+    initialRouteName: 'MesaPage',
   },
 );
 
