@@ -4,7 +4,7 @@ import {
   Text, Image, StyleSheet, Dimensions, ImageBackground, StatusBar, View, TouchableOpacity,
 } from 'react-native';
 
-import bgImage from '~/resource/img/FundoInicial.png';
+import bgImage from '~/resource/img/FundoInicialBlur.png';
 
 const styles = StyleSheet.create({
   container: {
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Home extends Component {
+export default class HomeLg extends Component {
   static navigationOptions = {
     headerTransparent: true,
   }
@@ -45,7 +45,7 @@ export default class Home extends Component {
       >
         <StatusBar barStyle="light-content" backgroundColor="#000" />
 
-        <TouchableOpacity style={styles.btnEntrar} onPress={() => this.props.navigation.navigate('HomelgPage')}>
+        <TouchableOpacity style={styles.btnEntrar} onPress={() => this.props.navigation.navigate('MesaPage')}>
           <Text style={styles.btnText}> Entrar </Text>
         </TouchableOpacity>
         
