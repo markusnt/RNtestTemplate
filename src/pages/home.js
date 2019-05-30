@@ -45,7 +45,7 @@ export default class Home extends Component {
       >
         <StatusBar barStyle="light-content" backgroundColor="#000" />
 
-        <TouchableOpacity style={styles.btnEntrar} onPress={() => this.props.navigation.navigate('HomelgPage')}>
+        <TouchableOpacity style={styles.btnEntrar} onPress={() => this.props.navigation.navigate('MesaPage')}>
           <Text style={styles.btnText}> Entrar </Text>
         </TouchableOpacity>
         
