@@ -101,10 +101,10 @@ export class produtos extends Component {
 
     renderProduto = ({ item }) => (
       <View style={styles.containerProduto}>
-        <View style={styles.boxProduto}>
+        <TouchableOpacity onPress={this.props.addProduto} style={styles.boxProduto}>
           <Text style={styles.textProduto}>{item.ds_produto} </Text>
           <Text style={styles.textPreco}>R${item.pr_produto.toFixed(2)}</Text>
-        </View>
+        </TouchableOpacity>
         <TouchableOpacity onPress={this.props.addProduto}>
           <Text style={styles.test}> Adicionar </Text>
         </TouchableOpacity>
@@ -112,10 +112,11 @@ export class produtos extends Component {
     );
 
     render() {
+      console.log(this.props.produtosx);
       return (
         <View>
           <StatusBar barStyle="light-content" backgroundColor="#25CBCB" />
-          <Text> Pedido tem {this.props.produtos.length} itens a serem enviados</Text>
+          <Text> Pedido tem {this.props.produtosx.length} itens a serem enviados</Text>
           {/* <ProgressBarAndroid
             styleAttr="Horizontal"
             indeterminate={false}
@@ -135,7 +136,7 @@ export class produtos extends Component {
 }
 
 const mapStateToProps = state => ({
-  produtos: state.produtos,
+  produtosx: state.produtos,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(ProdutoActions, dispatch);

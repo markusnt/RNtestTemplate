@@ -106,8 +106,8 @@ export class pedido extends Component {
     render() {
       const { navigation } = this.props;
       const nr_mesa = navigation.getParam('nr_mesa', 'NO-ID');
-      console.log(this.props.pedidoItems)
       console.log('teste de pedido ====')
+      console.log(this.props.pedidoItems)
       return (
         <View style={styles.container}>
           {this.props.pedidoItems.length > 0 ? (

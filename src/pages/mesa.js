@@ -161,18 +161,18 @@ export default class Mesa extends Component {
     };
 
     return (
-        <View>
-          <StatusBar barStyle="light-content" backgroundColor="#25CBCB" />
-      <FlatList
-        data={formatData(this.state.mesas, numColumns)}
-        style={styles.container}
-        keyExtractor={({ id }, index) => 'id' + index}
-        renderItem={this.renderMesa}
-        numColumns={numColumns}
-        refreshing={this.state.refreshing}
-        onRefresh={this.handleRefresh}
-      />
-        </View>
+      <View>
+        <StatusBar barStyle="light-content" backgroundColor="#25CBCB" />
+        <FlatList
+          data={formatData(this.state.mesas, numColumns)}
+          style={styles.container}
+          keyExtractor={item => String(item.cd_mesa)}
+          renderItem={this.renderMesa}
+          numColumns={numColumns}
+          refreshing={this.state.refreshing}
+          onRefresh={this.handleRefresh}
+        />
+      </View>
 
     );
   }
