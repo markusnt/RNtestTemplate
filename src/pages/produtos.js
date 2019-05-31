@@ -34,11 +34,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   test: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: 'bold',
     color: 'white',
     backgroundColor: '#DB4437',
-    borderRadius: 5,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 0,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 10,
     height: 25,
   },
 });
