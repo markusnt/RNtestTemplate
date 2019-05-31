@@ -5,15 +5,10 @@ import { createActions, createReducer } from 'reduxsauce';
  *  Action types & creators
  */
 
-export const Types = {
-  ADD_PRODUTO: 'produto/ADD_PRODUTO',
-  REMOVE_PRODUTO: 'produto/REMOVE_PRODUTO'
-}
-
-// export const { Types, Creators } = createActions({
-//   addProduto: ['cd_produto'],
-//   removeProduto: ['cd_produto'],
-// });
+export const { Types, Creators } = createActions({
+  addProduto: ['cd_produto'],
+  removeProduto: ['cd_produto'],
+});
 
 /**
  *  Handlers
@@ -21,32 +16,19 @@ export const Types = {
 
 const INITAL_STATE = [];
 // https://www.youtube.com/watch?v=rPik5Z2SvHs assistir esse video
-// const add = (state = INITAL_STATE, action) => [
-//   ...state,
-//   action.payload,
-// ];
+const add = (state = INITAL_STATE, action) => [
+  ...state,
+  action.payload,
+];
 
-// const remove = (state = INITAL_STATE, action) => state
-//   .filter(produto => produto.cd_produto !== action.cd_produto);
+const remove = (state = INITAL_STATE, action) => state
+  .filter(produto => produto.cd_produto !== action.cd_produto);
 
 /**
  * Reducer
  */
 
-export default function reducer(state = INITAL_STATE, action) {
-  switch (action.type){
-    case Types.ADD_PRODUTO:
-      return [...state, action.payload];
-
-    case Types.REMOVE_PRODUTO:
-      return [state.filter(produto => produto.cd_produto !== action.cd_produto)];
-
-    default:
-      return state;
-  }
-}
-
-// export default createReducer(INITAL_STATE, {
-//   [Types.ADD_PRODUTO]: add,
-//   [Types.REMOVE_PRODUTO]: remove,
-// });
+export default createReducer(INITAL_STATE, {
+  [Types.ADD_PRODUTO]: add,
+  [Types.REMOVE_PRODUTO]: remove,
+});
