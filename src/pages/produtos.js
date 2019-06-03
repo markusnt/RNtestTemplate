@@ -50,30 +50,35 @@ const styles = StyleSheet.create({
 // }
 
 export class produtos extends Component {
-    static navigationOptions = ({ navigation, navigate }) => ({
-      headerTransparent: false,
-      title: 'Produtos',
-      headerStyle: {
-        backgroundColor: '#25CBCB',
-      },
-      headerTintColor: '#FFF',
-      headerTitleStyle: {
-        textAlign: 'center',
-        flexGrow: 1,
-        alignSelf: 'center',
-      },
-      headerRight: (
-        <Icon
-          name="md-basket"
-          type="ionicon"
-          color="#25CBCB"
-          size={25}
-          reverse
-          onPress={() => { navigation.navigate('PedidoPage'); }}
+    static navigationOptions = ({ navigation, navigate }) => {
+      const nr_mesa = navigation.getParam('nr_mesa', 'NO-ID');
+      return {
+        headerTransparent: false,
+        title: 'Produtos',
+        headerStyle: {
+          backgroundColor: '#25CBCB',
+        },
+        headerTintColor: '#FFF',
+        headerTitleStyle: {
+          textAlign: 'center',
+          flexGrow: 1,
+          alignSelf: 'center',
+        },
+        headerRight: (
+          <Icon
+            name="md-basket"
+            type="ionicon"
+            color="#25CBCB"
+            size={25}
+            reverse
+            onPress={() => { navigation.navigate('PedidoPage', {
+              nr_mesa: nr_mesa
+            }); }}
           // onPress={navigation.navigate('PedidoPage')}
-        />
-      ),
-    })
+          />
+        ),
+      };
+    }
 
     state = {
       produtos: [],
@@ -108,14 +113,25 @@ export class produtos extends Component {
           <Text style={styles.textProduto}>{item.ds_produto} </Text>
           <Text style={styles.textPreco}>R${item.pr_produto.toFixed(2)}</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={this.props.addProduto}>
-          <Text style={styles.test}> Adicionar </Text>
-        </TouchableOpacity>
+        {this.props.produtosx.length === 0 ? (
+          <TouchableOpacity onPress={this.props.addProduto}>
+            <Text style={styles.test}> Adicionar </Text>
+          </TouchableOpacity>
+        ) : (
+<Icon
+              name="md-basket"
+        type="ionicon"
+        color="#25CBCB"
+        size={25}
+        reverse
+        onPress={() => { navigation.navigate(); }}
+      />
+)
+      }
       </View>
     );
 
     render() {
-      console.log(this.props.produtosx);
       return (
         <View>
           <StatusBar barStyle="light-content" backgroundColor="#25CBCB" />

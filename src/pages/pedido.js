@@ -54,9 +54,11 @@ const styles = StyleSheet.create({
 });
 
 export class pedido extends Component {
-    static navigationOptions = ({ navigation }) => ({
+    static navigationOptions = ({ navigation }) => {
+      const nr_mesa = navigation.getParam('nr_mesa', 'NO-ID');
+      return {
       headerTransparent: false,
-      title: 'Pedido',
+      title: 'Pedido Mesa-' + nr_mesa,
       headerStyle: {
         backgroundColor: '#25CBCB',
       },
@@ -74,7 +76,8 @@ export class pedido extends Component {
           size={25}
         />
       ),
-    })
+    }
+  }
 
     constructor(props) {
         super(props);
