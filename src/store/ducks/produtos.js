@@ -6,7 +6,7 @@ import { createActions, createReducer } from 'reduxsauce';
  */
 
 export const { Types, Creators } = createActions({
-  addProduto: ['cd_produto'],
+  addProduto: ['cd_produto', 'ds_produto'],
   removeProduto: ['cd_produto'],
 });
 
@@ -18,7 +18,7 @@ const INITAL_STATE = [];
 // https://www.youtube.com/watch?v=rPik5Z2SvHs assistir esse video
 const add = (state = INITAL_STATE, action) => [
   ...state,
-  action,
+  { cd_produto: action.cd_produto, ds_produto: action.ds_produto },
 ];
 
 const remove = (state = INITAL_STATE, action) => state

@@ -90,10 +90,10 @@ export class produtos extends Component {
       this.props.navigation.setParams({ increaseCount: this._increaseCount });
     }
 
-    handleAddCart = () => {
-      this.props.addProduto();
+    handleAddCart = (item) => {
+      this.props.addProduto(item.cd_produto, item.ds_produto);
       ToastAndroid.show('Produto adicionado ao pedido', ToastAndroid.SHORT);
-      this.setState({ count: this.state.count + 1 });
+      // this.setState({ count: this.state.count + 1 });
     }
 
     _increaseCount = () => {
@@ -120,14 +120,15 @@ export class produtos extends Component {
     renderProduto = ({ item }) => (
       <View style={styles.containerProduto}>
         <TouchableOpacity onPress={this.props.addProduto} style={styles.boxProduto}>
+          <Text style={styles.textProduto}>{item.cd_produto} </Text>
           <Text style={styles.textProduto}>{item.ds_produto} </Text>
           <Text style={styles.textPreco}>R${item.pr_produto.toFixed(2)}</Text>
         </TouchableOpacity>
-        {this.props.produtosx.length === 0 ? (
-          <TouchableOpacity onPress={this.handleAddCart}>
+        {/* {this.props.produtosx.length === 0 ? ( */}
+          <TouchableOpacity onPress={this.handleAddCart(item)}>
             <Text style={styles.test}> Adicionar </Text>
           </TouchableOpacity>
-        ) : (
+        {/* ) : (
 <Icon
               name="md-basket"
         type="ionicon"
@@ -137,7 +138,7 @@ export class produtos extends Component {
         onPress={() => { navigation.navigate(); }}
       />
 )
-      }
+      } */}
       </View>
     );
 
