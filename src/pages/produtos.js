@@ -91,6 +91,7 @@ export class produtos extends Component {
     }
 
     handleAddCart = () => {
+      this.props.addProduto();
       ToastAndroid.show('Produto adicionado ao pedido', ToastAndroid.SHORT);
       this.setState({ count: this.state.count + 1 });
     }
@@ -99,13 +100,22 @@ export class produtos extends Component {
       this.setState({ count: this.state.count + 0.01 });
     };
 
-    getProdutosApi = async () => fetch('http://192.168.1.179:1337/produtoS/19')
-      .then(response => response.json())
-      .then((responseJson) => {
-        this.setState({
-          produtos: responseJson,
+    _removeProduto = (item) => {
+      this.props.removeProduto(item);
+    }
+
+    getProdutosApi = async () => {
+      const { navigation } = this.props;
+      const CD_SUBGRUPO = navigation.getParam('CD_SUBGRUPO', 'NO-ID');
+
+      fetch(`http://192.168.1.179:1337/produtoS/${CD_SUBGRUPO}`)
+        .then(response => response.json())
+        .then((responseJson) => {
+          this.setState({
+            produtos: responseJson,
+          });
         });
-      })
+    }
 
     renderProduto = ({ item }) => (
       <View style={styles.containerProduto}>
@@ -114,7 +124,7 @@ export class produtos extends Component {
           <Text style={styles.textPreco}>R${item.pr_produto.toFixed(2)}</Text>
         </TouchableOpacity>
         {this.props.produtosx.length === 0 ? (
-          <TouchableOpacity onPress={this.props.addProduto}>
+          <TouchableOpacity onPress={this.handleAddCart}>
             <Text style={styles.test}> Adicionar </Text>
           </TouchableOpacity>
         ) : (
