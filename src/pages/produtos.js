@@ -91,6 +91,7 @@ export class produtos extends Component {
     }
 
     handleAddCart = (item) => {
+      // fazer quantidade de itens aki porra e arrumar pq ta chamando tudod
       this.props.addProduto(item.cd_produto, item.ds_produto);
       ToastAndroid.show('Produto adicionado ao pedido', ToastAndroid.SHORT);
       // this.setState({ count: this.state.count + 1 });
