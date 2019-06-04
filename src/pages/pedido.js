@@ -61,6 +61,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
+  TextD: {
+    fontSize: 20,
+    width: 250,
+  },
+
   TextP: {
     fontSize: 20,
   },
@@ -123,7 +128,7 @@ export class pedido extends Component {
 
     renderProduto = ({ item }) => (
       <View style={styles.containerProduto}>
-        <Text style={styles.TextP}>1x {item.ds_produto} </Text>
+        <Text style={styles.TextD}>1x {item.ds_produto} </Text>
         <Text style={styles.TextP}>R${item.pr_produto.toFixed(2)}</Text>
       </View>
     );
@@ -146,6 +151,7 @@ export class pedido extends Component {
               />
               
               <View style={styles.total_pedido}>
+              {/* https://stackoverflow.com/questions/51626700/in-react-redux-how-to-calculate-a-total-price-for-a-shopping-cart */}
                 <Text style={styles.TextP}> Total: R$ </Text>
               </View>
 
