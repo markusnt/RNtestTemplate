@@ -62,33 +62,33 @@ export class pedido extends Component {
     static navigationOptions = ({ navigation }) => {
       const nr_mesa = navigation.getParam('nr_mesa', 'NO-ID');
       return {
-      headerTransparent: false,
-      title: 'Pedido Mesa-' + nr_mesa,
-      headerStyle: {
-        backgroundColor: '#25CBCB',
-      },
-      headerTintColor: '#FFF',
-      headerTitleStyle: {
-        textAlign: 'center',
-        flexGrow: 1,
-        alignSelf: 'center',
-      },
-      headerRight: (
-        <Icon
-          name="md-basket"
-          type="ionicon"
-          color="#25CBCB"
-          size={25}
-        />
-      ),
+        headerTransparent: false,
+        title: 'Pedido Mesa-' + nr_mesa,
+        headerStyle: {
+          backgroundColor: '#25CBCB',
+        },
+        headerTintColor: '#FFF',
+        headerTitleStyle: {
+          textAlign: 'center',
+          flexGrow: 1,
+          alignSelf: 'center',
+        },
+        headerRight: (
+          <Icon
+            name="md-basket"
+            type="ionicon"
+            color="#25CBCB"
+            size={25}
+          />
+        ),
+      };
     }
-  }
 
     constructor(props) {
-        super(props);
-        this.state = {
-            pedido: this.props.pedidoItems,
-        }
+      super(props);
+      this.state = {
+        pedido: this.props.pedidoItems,
+      };
     }
 
 
