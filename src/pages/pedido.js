@@ -39,22 +39,38 @@ const styles = StyleSheet.create({
   total_pedido: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    borderTopWidth: 2,
+    borderTopColor: '#ddd',
     fontSize: 20,
     marginTop: 10,
   },
 
   btnLogin: {
-    flex: 1,
     flexDirection: 'row',
-    width: width,
-    height: 45,
+    height: 75,
     backgroundColor: '#17EE42',
+    alignItems: 'center',
     justifyContent: 'center',
     marginTop: 15,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
   },
 
   Text: {
     fontSize: 30,
+    fontWeight: 'bold',
+  },
+
+  TextP: {
+    fontSize: 20,
+  },
+
+  containerProduto: {
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    marginBottom: 15,
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });
 
@@ -107,8 +123,8 @@ export class pedido extends Component {
 
     renderProduto = ({ item }) => (
       <View style={styles.containerProduto}>
-        <Text>{item.ds_produto} </Text>
-        <Text>R${item.pr_produto.toFixed(2)}</Text>
+        <Text style={styles.TextP}>1x {item.ds_produto} </Text>
+        <Text style={styles.TextP}>R${item.pr_produto.toFixed(2)}</Text>
       </View>
     );
 
@@ -121,9 +137,6 @@ export class pedido extends Component {
         <View style={styles.container}>
           {this.props.pedidoItems.length > 0 ? (
             <View style={styles.pedidobox}>
-              <View style={styles.titulo_mesa}>
-                <Text> Mesa {nr_mesa} </Text>
-              </View>
 
               <FlatList
                 style={styles.itemList}
@@ -133,10 +146,9 @@ export class pedido extends Component {
               />
               
               <View style={styles.total_pedido}>
-                <Text> Total: R$ </Text>
+                <Text style={styles.TextP}> Total: R$ </Text>
               </View>
 
-              <Text> Itens a serem pedidos: {this.props.pedidoItems.length} </Text>
               <TouchableOpacity style={styles.btnLogin} onPress={() => this.alteracaoEstadoMesa()}>
                 <Text style={styles.Text}>Enviar Pedido </Text>
               </TouchableOpacity>

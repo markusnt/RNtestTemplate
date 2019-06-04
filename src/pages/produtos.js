@@ -71,9 +71,11 @@ export class produtos extends Component {
             color="#25CBCB"
             size={25}
             reverse
-            onPress={() => { navigation.navigate('PedidoPage', {
-              nr_mesa: nr_mesa
-            }); }}
+            onPress={() => {
+              navigation.navigate('PedidoPage', {
+                nr_mesa: nr_mesa,
+              });
+            }}
           // onPress={navigation.navigate('PedidoPage')}
           />
         ),
