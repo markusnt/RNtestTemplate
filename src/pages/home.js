@@ -18,14 +18,13 @@ const styles = StyleSheet.create({
   btnEntrar: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: 200,
+    width: Dimensions.get('window').width - 90,
     height: 50,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 5,
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 20,
-    backgroundColor: '#25CBCB',
-    marginTop: 40,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+    backgroundColor: 'rgba(37, 198, 201, 0.50)',
     marginBottom: 180,
   },
 
@@ -47,8 +46,8 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    width: 100,
-    height: 160,
+    width: 160,
+    height: 220,
     marginBottom: 80,
   },
 });
@@ -66,7 +65,7 @@ export default class Home extends Component {
         style={styles.container}
         resizeMode="cover"
       >
-        <StatusBar barStyle="light-content" backgroundColor="#25CBCB" />
+        <StatusBar barStyle="light-content" backgroundColor="#25C6C9" />
 
         <Image source={logo} style={styles.logo}></Image>
 

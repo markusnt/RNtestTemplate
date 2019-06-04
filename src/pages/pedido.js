@@ -108,7 +108,7 @@ export class pedido extends Component {
     renderProduto = ({ item }) => (
       <View style={styles.containerProduto}>
         <Text>{item.ds_produto} </Text>
-        <Text>R${item.pr_produto}</Text>
+        <Text>R${item.pr_produto.toFixed(2)}</Text>
       </View>
     );
 
