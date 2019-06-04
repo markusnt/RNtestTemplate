@@ -20,6 +20,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+  pedidobox: {
+    flex: 1,
+  },
+
   titulo_mesa: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -40,6 +44,7 @@ const styles = StyleSheet.create({
   },
 
   btnLogin: {
+    flex: 1,
     flexDirection: 'row',
     width: width,
     height: 45,
@@ -100,9 +105,10 @@ export class pedido extends Component {
       });
     }
 
-    renderProduto = item => (
+    renderProduto = ({ item }) => (
       <View style={styles.containerProduto}>
-        <Text> opa </Text>
+        <Text>{item.ds_produto} </Text>
+        <Text>R${item.pr_produto}</Text>
       </View>
     );
 
@@ -114,25 +120,18 @@ export class pedido extends Component {
       return (
         <View style={styles.container}>
           {this.props.pedidoItems.length > 0 ? (
-            <View>
+            <View style={styles.pedidobox}>
               <View style={styles.titulo_mesa}>
                 <Text> Mesa {nr_mesa} </Text>
               </View>
 
-              {/* <FlatList
+              <FlatList
                 style={styles.itemList}
                 data={this.props.pedidoItems}
-                keyExtractor={({ cd_produto }, index) => `cd_produto${index}`}
+                keyExtractor={item => String(item.cd_produto)}
                 renderItem={this.renderProduto}
-              /> */}
-
-              {/* <FlatList
-                style={styles.flat}
-                data={this.props.pedidoItems}
-                // eslint-disable-next-line no-unused-vars
-                keyExtractor={({ id }, index) => `id${index}`}
-                renderItem={this.renderProduto}
-              /> */}
+              />
+              
               <View style={styles.total_pedido}>
                 <Text> Total: R$ </Text>
               </View>

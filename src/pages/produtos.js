@@ -91,19 +91,13 @@ export class produtos extends Component {
     }
 
     handleAddCart = (item) => {
-      // fazer quantidade de itens aki porra e arrumar pq ta chamando tudod
-      this.props.addProduto(item.cd_produto, item.ds_produto);
+      this.props.addProduto(item.cd_produto, item.ds_produto, item.pr_produto);
       ToastAndroid.show('Produto adicionado ao pedido', ToastAndroid.SHORT);
-      // this.setState({ count: this.state.count + 1 });
     }
 
     _increaseCount = () => {
       this.setState({ count: this.state.count + 0.01 });
     };
-
-    _removeProduto = (item) => {
-      this.props.removeProduto(item);
-    }
 
     getProdutosApi = async () => {
       const { navigation } = this.props;
@@ -118,17 +112,21 @@ export class produtos extends Component {
         });
     }
 
+    handleAddCart = (item) => {
+      this.props.addProduto(item.cd_produto, item.ds_produto, item.pr_produto);
+      ToastAndroid.show('Produto adicionado ao pedido', ToastAndroid.SHORT);
+    }
+
     renderProduto = ({ item }) => (
       <View style={styles.containerProduto}>
-        <TouchableOpacity onPress={this.props.addProduto} style={styles.boxProduto}>
-          <Text style={styles.textProduto}>{item.cd_produto} </Text>
+        <TouchableOpacity style={styles.boxProduto}>
           <Text style={styles.textProduto}>{item.ds_produto} </Text>
           <Text style={styles.textPreco}>R${item.pr_produto.toFixed(2)}</Text>
         </TouchableOpacity>
         {/* {this.props.produtosx.length === 0 ? ( */}
-          <TouchableOpacity onPress={this.handleAddCart(item)}>
-            <Text style={styles.test}> Adicionar </Text>
-          </TouchableOpacity>
+        <TouchableOpacity onPress={() => this.handleAddCart(item)}>
+          <Text style={styles.test}> Adicionar </Text>
+        </TouchableOpacity>
         {/* ) : (
 <Icon
               name="md-basket"
