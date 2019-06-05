@@ -171,10 +171,6 @@ const mapStateToProps = state => ({
   produtosx: state.produtos,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(
-  ProdutoActions,
-  ContadorActions,
-  dispatch,
-);
+const mapDispatchToProps = dispatch => bindActionCreators( ProdutoActions, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(produtos);
