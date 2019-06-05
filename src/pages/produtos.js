@@ -93,11 +93,6 @@ export class produtos extends Component {
       this.props.navigation.setParams({ increaseCount: this._increaseCount });
     }
 
-    handleAddCart = (item) => {
-      this.props.addProduto(item.cd_produto, item.ds_produto, item.pr_produto);
-      ToastAndroid.show('Produto adicionado ao pedido', ToastAndroid.SHORT);
-    }
-
     _increaseCount = () => {
       this.setState({ count: this.state.count + 0.01 });
     };

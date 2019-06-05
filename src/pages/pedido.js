@@ -149,7 +149,7 @@ export class pedido extends Component {
           <Text style={styles.TextP}>R${item.pr_produto.toFixed(2)}</Text>
         </View>
         <View style={styles.containerIcon}>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity onPress={() => this.props.removeProduto(item.cd_produto)}>
             <Icon
               name="md-remove"
               type="ionicon"
@@ -158,7 +158,7 @@ export class pedido extends Component {
               raised
             />
           </TouchableOpacity>
-          <Text style={styles.TextQ}>   1   </Text>
+          <Text style={styles.TextQ}> 1 </Text>
           <TouchableOpacity onPress={() => {}}>
             <Icon
               name="md-add"
