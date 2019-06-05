@@ -67,7 +67,7 @@ export default class Home extends Component {
       >
         <StatusBar barStyle="light-content" backgroundColor="#25C6C9" />
 
-        <Image source={logo} style={styles.logo}></Image>
+        <Image source={logo} style={styles.logo} />
 
         <TextInput
           style={styles.input}
@@ -84,7 +84,7 @@ export default class Home extends Component {
           placeholderTextColor="rgba(255, 255, 255, 0.7)"
           underlineColorAndroid="transparent"
           onChangeText={texto => this.setState({ senha: texto })}
-          secureTextEntry={true} 
+          secureTextEntry
         />
 
         <TouchableOpacity style={styles.btnEntrar} onPress={() => this.props.navigation.navigate('MesaPage')}>

@@ -8,6 +8,7 @@ import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Creators as ProdutoActions } from '~/store/ducks/produtos';
+import { Creators as ContadorActions } from '~/store/ducks/contadorpedido'
 
 import {
   View, Text, StatusBar, TouchableOpacity, FlatList, ProgressBarAndroid, StyleSheet, ToastAndroid,
@@ -170,6 +171,10 @@ const mapStateToProps = state => ({
   produtosx: state.produtos,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(ProdutoActions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(
+  ProdutoActions,
+  ContadorActions,
+  dispatch,
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(produtos);

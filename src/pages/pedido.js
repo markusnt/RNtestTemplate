@@ -63,16 +63,17 @@ const styles = StyleSheet.create({
 
   TextD: {
     fontSize: 20,
-    width: 250,
+    width: 230,
   },
 
   TextP: {
     fontSize: 20,
+    fontWeight: 'bold',
   },
 
   containerProduto: {
     flexDirection: 'row',
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     marginBottom: 15,
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -128,7 +129,20 @@ export class pedido extends Component {
 
     renderProduto = ({ item }) => (
       <View style={styles.containerProduto}>
-        <Text style={styles.TextD}>1x {item.ds_produto} </Text>
+        <Text style={styles.TextD}>{item.ds_produto} </Text>
+        <Icon
+          name="md-remove"
+          type="ionicon"
+          color="#ff0000"
+          size={20}
+        />
+        <Text style={styles.TextP}> 1 </Text>
+        <Icon
+          name="md-add"
+          type="ionicon"
+          color="#00ff00"
+          size={20}
+        />
         <Text style={styles.TextP}>R${item.pr_produto.toFixed(2)}</Text>
       </View>
     );
