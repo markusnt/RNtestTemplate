@@ -6,7 +6,7 @@ import { Icon } from 'react-native-elements';
 import {
   View,
   Text,
-  StyleSheet, TouchableOpacity, Dimensions, FlatList,
+  StyleSheet, TouchableOpacity, Dimensions, FlatList, TouchableHighlight,
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -63,10 +63,16 @@ const styles = StyleSheet.create({
 
   TextD: {
     fontSize: 20,
-    width: 230,
+    fontWeight: 'bold',
+    width: 250,
   },
 
   TextP: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+
+  TextQ: {
     fontSize: 20,
     fontWeight: 'bold',
   },
@@ -77,6 +83,15 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+
+  containerIcon: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  containerProdutoinfo: {
+    flexDirection: 'column',
   },
 });
 
@@ -129,21 +144,31 @@ export class pedido extends Component {
 
     renderProduto = ({ item }) => (
       <View style={styles.containerProduto}>
-        <Text style={styles.TextD}>{item.ds_produto} </Text>
-        <Icon
-          name="md-remove"
-          type="ionicon"
-          color="#ff0000"
-          size={20}
-        />
-        <Text style={styles.TextP}> 1 </Text>
-        <Icon
-          name="md-add"
-          type="ionicon"
-          color="#00ff00"
-          size={20}
-        />
-        <Text style={styles.TextP}>R${item.pr_produto.toFixed(2)}</Text>
+        <View style={styles.containerProdutoinfo}>
+          <Text style={styles.TextD}>{item.ds_produto}</Text>
+          <Text style={styles.TextP}>R${item.pr_produto.toFixed(2)}</Text>
+        </View>
+        <View style={styles.containerIcon}>
+          <TouchableOpacity onPress={() => {}}>
+            <Icon
+              name="md-remove"
+              type="ionicon"
+              color="#ff0000"
+              size={20}
+              raised
+            />
+          </TouchableOpacity>
+          <Text style={styles.TextQ}>   1   </Text>
+          <TouchableOpacity onPress={() => {}}>
+            <Icon
+              name="md-add"
+              type="ionicon"
+              color="#ff0000"
+              size={20}
+              raised
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     );
 
