@@ -133,6 +133,10 @@ export class pedido extends Component {
 
     }
 
+    handleAddCart = (item) => {
+      this.props.addQty(item.cd_produto, item.ds_produto, item.pr_produto, item.quantidade);
+    }
+
     alteracaoEstadoMesa() {
       const { navigation } = this.props;
       const nr_mesa = navigation.getParam('nr_mesa', 'NO-ID');
@@ -141,6 +145,7 @@ export class pedido extends Component {
         method: 'PUT',
       });
     }
+
 
     renderProduto = ({ item }) => (
       <View style={styles.containerProduto}>
@@ -158,8 +163,8 @@ export class pedido extends Component {
               raised
             />
           </TouchableOpacity>
-          <Text style={styles.TextQ}> 1 </Text>
-          <TouchableOpacity onPress={() => {}}>
+          <Text style={styles.TextQ}> {item.quantidade} </Text>
+          <TouchableOpacity onPress={() => this.handleAddCart(item)}>
             <Icon
               name="md-add"
               type="ionicon"
