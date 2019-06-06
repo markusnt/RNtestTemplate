@@ -6,12 +6,10 @@ import React, { Component } from 'react';
 import { Icon } from 'react-native-elements';
 
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Creators as ProdutoActions } from '~/store/ducks/produtos';
-import { Creators as ContadorActions } from '~/store/ducks/contadorpedido'
+import { addToCart, dataApi } from '~/store/ducks/carrinhoprodutos';
 
 import {
-  View, Text, StatusBar, TouchableOpacity, FlatList, ProgressBarAndroid, StyleSheet, ToastAndroid,
+  View, Text, StatusBar, TouchableOpacity, FlatList, StyleSheet, ToastAndroid,
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -84,34 +82,35 @@ export class produtos extends Component {
     }
 
     state = {
-      produtos: [],
-      count: 0,
+      items: [],
     };
 
     componentDidMount() {
       this.getProdutosApi();
-      this.props.navigation.setParams({ increaseCount: this._increaseCount });
     }
-
-    _increaseCount = () => {
-      this.setState({ count: this.state.count + 0.01 });
-    };
-
+  
     getProdutosApi = async () => {
       const { navigation } = this.props;
       const CD_SUBGRUPO = navigation.getParam('CD_SUBGRUPO', 'NO-ID');
-
       fetch(`http://192.168.1.179:1337/produtoS/${CD_SUBGRUPO}`)
         .then(response => response.json())
         .then((responseJson) => {
+          this.props.dataApi(responseJson);
           this.setState({
-            produtos: responseJson,
+            items: responseJson,
           });
         });
     }
 
-    handleAddCart = (item) => {
-      this.props.addProduto(item.cd_produto, item.ds_produto, item.pr_produto);
+    // async getProdutosApi() {
+    //   try {
+    //     const response = await fetch(`http://192.168.1.179:1337/produtoS/${CD_SUBGRUPO}`)
+    //   }
+    // }
+
+
+    handleAdd = (cd_produto) => {
+      this.props.addToCart(cd_produto);
       ToastAndroid.show('Produto adicionado ao pedido', ToastAndroid.SHORT);
     }
 
@@ -121,21 +120,9 @@ export class produtos extends Component {
           <Text style={styles.textProduto}>{item.ds_produto} </Text>
           <Text style={styles.textPreco}>R${item.pr_produto.toFixed(2)}</Text>
         </TouchableOpacity>
-        {/* {this.props.produtosx.length === 0 ? ( */}
-        <TouchableOpacity onPress={() => this.handleAddCart(item)}>
+        <TouchableOpacity onPress={() => this.handleAdd(item.cd_produto)}>
           <Text style={styles.test}> Adicionar </Text>
         </TouchableOpacity>
-        {/* ) : (
-<Icon
-              name="md-basket"
-        type="ionicon"
-        color="#25CBCB"
-        size={25}
-        reverse
-        onPress={() => { navigation.navigate(); }}
-      />
-)
-      } */}
       </View>
     );
 
@@ -143,17 +130,9 @@ export class produtos extends Component {
       return (
         <View>
           <StatusBar barStyle="light-content" backgroundColor="#25CBCB" />
-          <Text> Pedido tem {this.props.produtosx.length} itens a serem enviados</Text>
-          {/* <ProgressBarAndroid
-            styleAttr="Horizontal"
-            indeterminate={false}
-            progress={this.state.count}
-          />
-          <Text> Items no Carrinho: {this.state.count}</Text> */}
-          
           <FlatList
             style={styles.flat}
-            data={this.state.produtos}
+            data={this.state.items}
             keyExtractor={item => String(item.cd_produto)}
             renderItem={this.renderProduto}
           />
@@ -163,9 +142,13 @@ export class produtos extends Component {
 }
 
 const mapStateToProps = state => ({
-  produtosx: state.produtos,
+  items: state.items,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators( ProdutoActions, dispatch);
+// const mapDispatchToProps = dispatch => bindActionCreators( carrinhoReducer, dispatch);
+const mapDispatchToProps = dispatch => ({
+  addToCart: cd_produto => (dispatch(addToCart(cd_produto))),
+  dataApi: date => (dispatch(dataApi(date))),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(produtos);

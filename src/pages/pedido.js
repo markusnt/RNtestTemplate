@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Creators as ProdutoActions } from '~/store/ducks/produtos';
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
