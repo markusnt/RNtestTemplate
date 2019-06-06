@@ -26,7 +26,20 @@ const increment = (state, action) => {
 };
 
 const decrement = (state, action) => {
-  const currentQuantity = state[action.cd_produto] || 0;
+  const productId = payload.product.id
+
+  if (state.cart.findIndex(product => product.id === productId) !== -1) {
+    const cart = state.cart.reduce((cartAcc, product) => {
+      if (product.id === productId) {
+        cartAcc.push({ ...product, qty: product.qty++ }) // Increment qty
+      } else {
+        cartAcc.push(product);
+      }
+      return cartAcc
+    }, []);
+    return { ...state, cart };
+  }
+  return { ...state, cart: [...state.cart, { ...payload.product, qty: 0 }] };
   return {
     ...state,
     [action.cd_produto]: Math.max(currentQuantity - 1, 0),

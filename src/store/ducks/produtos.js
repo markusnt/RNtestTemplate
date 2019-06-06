@@ -31,7 +31,7 @@ const remove = (state = INITAL_STATE, action) => state
   .filter(produto => produto.cd_produto !== action.cd_produto);
 
 const qty = (state = INITAL_STATE, action) => [
-  state.find(produto => produto.cd_produto !== action.cd_produto),
+  state.find(produto => produto.cd_produto === action.cd_produto),
   {
     cd_produto: action.cd_produto,
     ds_produto: action.ds_produto,
@@ -39,6 +39,22 @@ const qty = (state = INITAL_STATE, action) => [
     quantidade: action.quantidade + 1,
   },
 ];
+
+// const decrement = (state, action) => {
+//   const productId = payload.product.id
+
+//   if (state.cart.findIndex(product => product.id === productId) !== -1) {
+//     const cart = state.cart.reduce((cartAcc, product) => {
+//       if (product.id === productId) {
+//         cartAcc.push({ ...product, qty: product.qty++ }) // Increment qty
+//       } else {
+//         cartAcc.push(product);
+//       }
+//       return cartAcc
+//     }, []);
+//     return { ...state, cart };
+//   }
+//   return { ...state, cart: [...state.cart, { ...payload.product, qty: 0 }] };
 
 /**
  * Reducer

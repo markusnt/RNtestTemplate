@@ -13,8 +13,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Creators as ProdutoActions } from '~/store/ducks/produtos';
 
-width = Dimensions.get('window').width;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -64,7 +62,7 @@ const styles = StyleSheet.create({
   TextD: {
     fontSize: 20,
     fontWeight: 'bold',
-    width: 250,
+    width: Dimensions.get('window').width - 150,
   },
 
   TextP: {
