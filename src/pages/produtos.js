@@ -92,7 +92,7 @@ export class produtos extends Component {
     getProdutosApi = async () => {
       const { navigation } = this.props;
       const CD_SUBGRUPO = navigation.getParam('CD_SUBGRUPO', 'NO-ID');
-      fetch(`http://192.168.1.113:1337/produtoS/${CD_SUBGRUPO}`)
+      fetch(`http://192.168.1.179:1337/produtoS/${CD_SUBGRUPO}`)
         .then(response => response.json())
         .then((responseJson) => {
           this.props.dataApi(responseJson);
@@ -105,7 +105,7 @@ export class produtos extends Component {
 
     // async getProdutosApi() {
     //   try {
-    //     const response = await fetch(`http://192.168.1.113:1337/produtoS/${CD_SUBGRUPO}`) 192.168.1.113
+    //     const response = await fetch(`http://192.168.1.179:1337/produtoS/${CD_SUBGRUPO}`) 192.168.1.179
     //   }
     // }
 

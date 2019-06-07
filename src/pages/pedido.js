@@ -118,6 +118,7 @@ export class pedido extends Component {
         ),
       };
     }
+    
 
     // constructor(props) {
     //   super(props);
@@ -143,12 +144,10 @@ export class pedido extends Component {
       const { navigation } = this.props;
       const nr_mesa = navigation.getParam('nr_mesa', 'NO-ID');
       this.props.navigation.navigate('MesaPage');
-      return fetch('http://192.168.1.113:1337/mesaAtendimento/' + nr_mesa, {
+      return fetch('http://192.168.1.179:1337/mesaAtendimento/' + nr_mesa, {
         method: 'PUT',
       });
     }
-
-
 
     renderProduto = ({ item }) => (
       <View style={styles.containerProduto}>
@@ -191,6 +190,7 @@ export class pedido extends Component {
               <FlatList
                 style={styles.itemList}
                 data={this.props.pedidoItems}
+                extraData={this.props}
                 keyExtractor={item => String(item.cd_produto)}
                 renderItem={this.renderProduto}
               />

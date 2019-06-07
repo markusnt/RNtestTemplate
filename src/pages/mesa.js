@@ -81,7 +81,7 @@ export default class Mesa extends Component {
 
   getMesasApi = async () => {
     this.setState({ loading: true });
-    fetch('http://192.168.1.113:1337/mesa')
+    fetch('http://192.168.1.179:1337/mesa')
       .then(response => response.json())
       .then((responseJson) => {
         this.setState({
