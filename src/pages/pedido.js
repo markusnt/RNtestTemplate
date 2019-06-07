@@ -198,6 +198,7 @@ export class pedido extends Component {
               <View style={styles.total_pedido}>
               {/* https://stackoverflow.com/questions/51626700/in-react-redux-how-to-calculate-a-total-price-for-a-shopping-cart */}
                 <Text style={styles.TextD}> Total: R$ {this.props.total.toFixed(2)}</Text>
+                <Text style={styles.TextD}> Total: R$ {this.props.carrinhoReducer}</Text>
               </View>
 
               <TouchableOpacity style={styles.btnLogin} onPress={() => this.alteracaoEstadoMesa()}>
