@@ -92,7 +92,7 @@ export class produtos extends Component {
     getProdutosApi = async () => {
       const { navigation } = this.props;
       const CD_SUBGRUPO = navigation.getParam('CD_SUBGRUPO', 'NO-ID');
-      fetch(`http://192.168.1.179:1337/produtoS/${CD_SUBGRUPO}`)
+      fetch(`http://192.168.1.113:1337/produtoS/${CD_SUBGRUPO}`)
         .then(response => response.json())
         .then((responseJson) => {
           this.props.dataApi(responseJson);
@@ -100,11 +100,12 @@ export class produtos extends Component {
             items: responseJson,
           });
         });
+      console.log(this.props.dataApi)
     }
 
     // async getProdutosApi() {
     //   try {
-    //     const response = await fetch(`http://192.168.1.179:1337/produtoS/${CD_SUBGRUPO}`)
+    //     const response = await fetch(`http://192.168.1.113:1337/produtoS/${CD_SUBGRUPO}`) 192.168.1.113
     //   }
     // }
 
@@ -142,7 +143,10 @@ export class produtos extends Component {
 }
 
 const mapStateToProps = state => ({
-  items: state.items,
+  // items: state.items,
+  addedItems: state.carrinhoReducer.addedItems,
+  total: state.total,
+  INITAL_STATE: state.INITAL_STATE,
 });
 
 // const mapDispatchToProps = dispatch => bindActionCreators( carrinhoReducer, dispatch);

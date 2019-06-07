@@ -82,7 +82,7 @@ export default class SubGrupo extends Component {
         const { navigation } = this.props;
         const cd_grupo = navigation.getParam('cd_grupo', 'NO-ID');
 
-        return await fetch('http://192.168.1.179:1337/subgrupoS/' + cd_grupo)
+        return await fetch('http://192.168.1.113:1337/subgrupoS/' + cd_grupo)
             .then((response) => response.json())
             .then((responseJson) => {
 

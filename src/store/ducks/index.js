@@ -4,10 +4,8 @@ import produtos from './produtos';
 import contadorpedido from './contadorpedido';
 import { carrinhoReducer } from './carrinhoprodutos';
 
-// const reducers = combineReducers({
-//   carrinhoprodutos,
-// });
-
-export default combineReducers({
+const reducers = combineReducers({
   carrinhoReducer,
 });
+
+export default reducers;

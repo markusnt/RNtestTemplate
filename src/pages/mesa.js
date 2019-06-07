@@ -12,6 +12,7 @@ import {
   FlatList,
   TouchableOpacity,
   StatusBar,
+  Button,
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -69,6 +70,7 @@ export default class Mesa extends Component {
       super();
       this.state = {
         mesas: [],
+        loading: false,
         refreshing: false,
       };
     }
@@ -79,7 +81,7 @@ export default class Mesa extends Component {
 
   getMesasApi = async () => {
     this.setState({ loading: true });
-    fetch('http://192.168.1.179:1337/mesa')
+    fetch('http://192.168.1.113:1337/mesa')
       .then(response => response.json())
       .then((responseJson) => {
         this.setState({
@@ -135,13 +137,19 @@ export default class Mesa extends Component {
     );
   }
 
+  renderMsg = () => (
+    <View>
+      <Text> Não achei Mesas </Text>
+    </View>
+  );
+
 
   handleRefresh = () => {
     this.setState({
       refreshing: true,
     }, () => {
-      this.getMesasApi()
-    })
+      this.getMesasApi();
+    });
   }
 
   render() {
@@ -163,15 +171,23 @@ export default class Mesa extends Component {
     return (
       <View>
         <StatusBar barStyle="light-content" backgroundColor="#25CBCB" />
-        <FlatList
-          data={formatData(this.state.mesas, numColumns)}
-          style={styles.container}
-          keyExtractor={item => String(item.cd_mesa)}
-          renderItem={this.renderMesa}
-          numColumns={numColumns}
-          refreshing={this.state.refreshing}
-          onRefresh={this.handleRefresh}
-        />
+        {this.state.mesas.length > 0 ? (
+          <FlatList
+            data={formatData(this.state.mesas, numColumns)}
+            style={styles.container}
+            keyExtractor={item => String(item.cd_mesa)}
+            renderItem={this.renderMesa}
+            numColumns={numColumns}
+            refreshing={this.state.refreshing}
+            onRefresh={this.handleRefresh}
+          />
+        ) : (
+          <View refreshing={this.state.refreshing}
+          onRefresh={this.handleRefresh}>
+            <Text> Não encontrei mesas </Text>
+          </View>
+        )
+        }
       </View>
 
     );

@@ -10,8 +10,7 @@ import {
 } from 'react-native';
 
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Creators as ProdutoActions } from '~/store/ducks/produtos';
+import { removeItem, addQuantity, subtractQuantity } from '~/store/ducks/carrinhoprodutos';
 
 
 const styles = StyleSheet.create({
@@ -120,30 +119,35 @@ export class pedido extends Component {
       };
     }
 
-    constructor(props) {
-      super(props);
-      this.state = {
-        pedido: this.props.pedidoItems,
-      };
-    }
+    // constructor(props) {
+    //   super(props);
+    //   this.state = {
+    //     pedido: this.props.pedidoItems,
+    //   };
+    // }
 
 
     componentDidMount() {
 
     }
 
-    handleAddCart = (item) => {
-      this.props.addQty(item.cd_produto, item.ds_produto, item.pr_produto, item.quantidade);
+    handleAddQty = (cd_produto) => {
+      this.props.addQuantity(cd_produto);
+    }
+
+    handleRevQty = (cd_produto) => {
+      this.props.subtractQuantity(cd_produto);
     }
 
     alteracaoEstadoMesa() {
       const { navigation } = this.props;
       const nr_mesa = navigation.getParam('nr_mesa', 'NO-ID');
       this.props.navigation.navigate('MesaPage');
-      return fetch('http://192.168.1.179:1337/mesaAtendimento/' + nr_mesa, {
+      return fetch('http://192.168.1.113:1337/mesaAtendimento/' + nr_mesa, {
         method: 'PUT',
       });
     }
+
 
 
     renderProduto = ({ item }) => (
@@ -153,7 +157,7 @@ export class pedido extends Component {
           <Text style={styles.TextP}>R${item.pr_produto.toFixed(2)}</Text>
         </View>
         <View style={styles.containerIcon}>
-          <TouchableOpacity onPress={() => this.props.removeProduto(item.cd_produto)}>
+          <TouchableOpacity onPress={() => this.handleRevQty(item.cd_produto)}>
             <Icon
               name="md-remove"
               type="ionicon"
@@ -162,8 +166,8 @@ export class pedido extends Component {
               raised
             />
           </TouchableOpacity>
-          <Text style={styles.TextQ}> {item.quantidade} </Text>
-          <TouchableOpacity onPress={() => this.handleAddCart(item)}>
+          <Text style={styles.TextQ}> {item.quantity} </Text>
+          <TouchableOpacity onPress={() => this.handleAddQty(item.cd_produto)}>
             <Icon
               name="md-add"
               type="ionicon"
@@ -179,11 +183,9 @@ export class pedido extends Component {
     render() {
       const { navigation } = this.props;
       const nr_mesa = navigation.getParam('nr_mesa', 'NO-ID');
-      console.log('teste de pedido ====')
-      console.log(this.props.pedidoItems)
       return (
         <View style={styles.container}>
-          {this.props.pedidoItems.length > 0 ? (
+          {/* {this.props.pedidoItems.length > 0 ? ( */}
             <View style={styles.pedidobox}>
 
               <FlatList
@@ -195,24 +197,32 @@ export class pedido extends Component {
               
               <View style={styles.total_pedido}>
               {/* https://stackoverflow.com/questions/51626700/in-react-redux-how-to-calculate-a-total-price-for-a-shopping-cart */}
-                <Text style={styles.TextP}> Total: R$ </Text>
+                <Text style={styles.TextD}> Total: R$ {this.props.total.toFixed(2)}</Text>
               </View>
 
               <TouchableOpacity style={styles.btnLogin} onPress={() => this.alteracaoEstadoMesa()}>
                 <Text style={styles.Text}>Enviar Pedido </Text>
               </TouchableOpacity>
             </View>
-          ) : <Text>Sem Produtos a serem enviados</Text>
-          }
+          {/* ) : <Text>Sem Produtos a serem enviados</Text> */}
+          {/* } */}
         </View>
       );
     }
 }
 
 const mapStateToProps = state => ({
-  pedidoItems: state.produtos,
+  pedidoItems: state.carrinhoReducer.addedItems,
+  total: state.carrinhoReducer.total,
+  // addedItems: state.addedItems,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(ProdutoActions, dispatch);
+// const mapDispatchToProps = dispatch => bindActionCreators(ProdutoActions, dispatch);
+
+const mapDispatchToProps = dispatch => ({
+  removeItem: cd_produto => (dispatch(removeItem(cd_produto))),
+  addQuantity: cd_produto => (dispatch(addQuantity(cd_produto))),
+  subtractQuantity: cd_produto => (dispatch(subtractQuantity(cd_produto))),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(pedido);
